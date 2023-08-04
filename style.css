@@ -1,0 +1,33 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+:root {
+    --cellSize: 2rem;
+}
+
+
+.gameBoard {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 400px;
+    height: 400px;
+    border: 1px solid black;
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+
+}
+.cell {
+   
+}
+.cell.black {
+    background-color: rgb(173, 170, 170);
+}
