@@ -27,9 +27,7 @@ body {
     grid-template-columns: repeat(8,1fr);
 
 }
-.cell {
-   
-}
+
 .cell.black {
     background-color: var(--background)
 }
