@@ -10,6 +10,8 @@ body {
 
 :root {
     --cellSize: 2rem;
+    --background:rgb(173, 170, 170);
+    --margin: 0.5rem;
 }
 
 
@@ -29,5 +31,39 @@ body {
    
 }
 .cell.black {
-    background-color: rgb(173, 170, 170);
+    background-color: var(--background)
+}
+
+.ui {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.startButton {
+    width: 7vw;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+.startButton:hover {
+    cursor: pointer;
+    background-color:var(--background);
+}
+.message {
+   font-size: .9rem;
+   margin: var(--margin)
+}
+.cell.knightStart {
+    background-color: blue;
+}
+.cell.knightEnd {
+    background-color: red;
 }
