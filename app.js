@@ -7,7 +7,6 @@ function createBoard() {
     const gameBoard = document.getElementById('gameBoard');
     startButton.addEventListener('click', placeKnight);
     
-
     for(let row = 8; row >= 1; row --) {
         for(let col = 1; col < 9; col ++) {
             const cell = document.createElement('div');
@@ -42,14 +41,14 @@ function placeKnight() {
                 knightStart = true;
                 message.innerHTML = "Now pick the knight's ending position"
                 
-                startingPosition.push(cell.dataset.row);
-                startingPosition.push(cell.dataset.col);
+                startingPosition.push(Number(cell.dataset.row));
+                startingPosition.push(Number(cell.dataset.col));
             } else {
                 cell.classList.add('knightEnd');
                 cell.id = 'knightEnd';
                 endKnight = true;
-                targetPosition.push(cell.dataset.row);
-                targetPosition.push(cell.dataset.col);
+                targetPosition.push(Number(cell.dataset.row));
+                targetPosition.push(Number(cell.dataset.col));
                 knightMoves();
             }
             
@@ -81,14 +80,20 @@ function generateLegalMoves(position){
         }
        
     });
-
     return validMoves;
-
 }
 
 function knightMoves() {
     message.innerHTML =" Here is the fastest way, from (R,C)"+startingPosition+" to "+targetPosition
     console.log(startingPosition)
+    const legalMoves = generateLegalMoves(startingPosition);
+    console.log(legalMoves)
+    legalMoves.forEach(move => {
+        const [r,c] = move;
+        const legalMove = document.querySelector(`[data-row="${r}"][data-col="${c}"]`);
+        legalMove.classList.add('legalMove')
+
+    })
 
    
  
