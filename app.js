@@ -57,6 +57,11 @@ function placeKnight() {
     })
 }
 
+function knightMoves() {
+    message.innerHTML =" Here is the fastest way, from (R,C)"+startingPosition+" to "+targetPosition
+
+}
+
 createBoard();
 
 
