@@ -57,8 +57,42 @@ function placeKnight() {
     })
 }
 
+function generateLegalMoves(position){
+    const moves = [
+        [+2,-1],
+        [+2,+1],
+        [+1,+2],
+        [-1,+2],
+        [-2,+1],
+        [-2,-1],
+        [-1,-2],
+        [+1,-2]
+    ]
+    const [startRow, startCol] = position;
+    const validMoves = [];
+
+    moves.forEach(move => {
+        const [rowOffset, colOffset] = move;
+        const newRow = startRow + rowOffset;
+        const newCol = startCol + colOffset;
+
+        if(newRow >= 1 && newRow <= 8 && newCol >= 1 && newCol <= 8) {
+            validMoves.push([newRow, newCol]);      
+        }
+       
+    });
+
+    return validMoves;
+
+}
+
 function knightMoves() {
     message.innerHTML =" Here is the fastest way, from (R,C)"+startingPosition+" to "+targetPosition
+    console.log(startingPosition)
+
+   
+ 
+
 
 }
 
