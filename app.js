@@ -83,13 +83,14 @@ function generateLegalMoves(position){
 function findShortestPath(visited,src,dest) {
     console.log("Explosring path : "+src+" --> "+dest)
     
-    if(visited.has(src)) return false;
-
+    if(visited.has(JSON.stringify(src))) return false;
+    console.log(visited)
+    visited.add(JSON.stringify(src))
     if(JSON.stringify(src) === JSON.stringify(dest)) {
-        console.log('Pass found')
+        console.log('Pass found: '+[...visited])
         return true 
     } 
-    visited.add(src)
+   
     
     const legalMoves = generateLegalMoves(src);
     console.log("Legal moves for this path are : "+legalMoves)
@@ -97,7 +98,6 @@ function findShortestPath(visited,src,dest) {
     for (let move of legalMoves) {
         console.log(move)
         if(findShortestPath(visited,move,dest)) {
-            console.log('Path found ')
             return true
         }
         
