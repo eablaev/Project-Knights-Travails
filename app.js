@@ -23,10 +23,7 @@ function createBoard() {
         }
     }
 }
-function knightMoves() {
-    message.innerHTML =" Here is the fastest way, from "+startingPosition+" to "+targetPosition
 
-}
 function placeKnight() {
     let knightStart = false;
     let endKnight = false;
@@ -49,7 +46,7 @@ function placeKnight() {
                 endKnight = true;
                 targetPosition.push(Number(cell.dataset.row));
                 targetPosition.push(Number(cell.dataset.col));
-                knightMoves();
+                findShortestPath(new Set(),startingPosition,targetPosition);
             }
             
         });
@@ -83,22 +80,32 @@ function generateLegalMoves(position){
     return validMoves;
 }
 
-function knightMoves() {
-    message.innerHTML =" Here is the fastest way, from (R,C)"+startingPosition+" to "+targetPosition
-    console.log(startingPosition)
-    const legalMoves = generateLegalMoves(startingPosition);
-    console.log(legalMoves)
-    legalMoves.forEach(move => {
-        const [r,c] = move;
-        const legalMove = document.querySelector(`[data-row="${r}"][data-col="${c}"]`);
-        legalMove.classList.add('legalMove')
+function findShortestPath(visited,src,dest) {
+    console.log("Explosring path : "+src+" --> "+dest)
+    
+    if(visited.has(src)) return false;
 
-    })
+    if(JSON.stringify(src) === JSON.stringify(dest)) {
+        console.log('Pass found')
+        return true 
+    } 
+    visited.add(src)
+    
+    const legalMoves = generateLegalMoves(src);
+    console.log("Legal moves for this path are : "+legalMoves)
 
-   
- 
-
-
+    for (let move of legalMoves) {
+        console.log(move)
+        if(findShortestPath(visited,move,dest)) {
+            console.log('Path found ')
+            return true
+        }
+        
+    }
+    
+    return false   
+    
+    // message.innerHTML =" Here is the fastest way, from (R,C)"+startingPosition+" to "+targetPosition
 }
 
 createBoard();
