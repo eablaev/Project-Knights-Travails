@@ -28,6 +28,13 @@ body {
 
 }
 
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+}
+
 .cell.black {
     background-color: var(--background)
 }

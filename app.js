@@ -14,6 +14,7 @@ function createBoard() {
             cell.setAttribute('data-cell','cell');
             cell.dataset.row = row; // Set the row number as data-row attribute
             cell.dataset.col = col;
+            cell.innerHTML = row+" "+col
             if((row+col) % 2 === 0) {
                 cell.classList.add('white')
             } else {
@@ -81,28 +82,34 @@ function generateLegalMoves(position){
 }
 
 function findShortestPath(visited,src,dest) {
-    console.log("Explosring path : "+src+" --> "+dest)
-    
-    if(visited.has(JSON.stringify(src))) return false;
-    console.log(visited)
-    visited.add(JSON.stringify(src))
-    if(JSON.stringify(src) === JSON.stringify(dest)) {
-        console.log('Pass found: '+[...visited])
-        return true 
-    } 
-   
-    
-    const legalMoves = generateLegalMoves(src);
-    console.log("Legal moves for this path are : "+legalMoves)
+    const queue  = [src];
+    console.log(queue)
 
-    for (let move of legalMoves) {
-        console.log(move)
-        if(findShortestPath(visited,move,dest)) {
+    console.log("Exploring path : "+src+" --> "+dest)
+
+    while (queue.length > 0) {
+        const current = queue.shift();
+        console.log("current is "+current)
+        if(visited.has((JSON.stringify(current)))) {
+            console.log('Visited')
+            continue
+        } 
+        if(JSON.stringify(current) === JSON.stringify(dest)) {
+            console.log('Path found');
             return true
         }
         
+        visited.add(JSON.stringify(current));
+        console.log("Visited: "+[...visited]);
+        
+        const legalMoves = generateLegalMoves(current);
+        for (let move of legalMoves) {
+            
+            queue.push(move)
+        } 
+        // console.log(queue)  
     }
-    
+
     return false   
     
     // message.innerHTML =" Here is the fastest way, from (R,C)"+startingPosition+" to "+targetPosition
