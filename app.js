@@ -82,30 +82,33 @@ function generateLegalMoves(position){
 }
 
 function findShortestPath(visited,src,dest) {
-    const queue  = [src];
+    const queue  = [{node: src, parent: null}];
     console.log(queue)
 
     console.log("Exploring path : "+src+" --> "+dest)
 
     while (queue.length > 0) {
-        const current = queue.shift();
-        console.log("current is "+current)
-        if(visited.has((JSON.stringify(current)))) {
+        const {node, parent } = queue.shift();
+      
+
+        if(visited.has((JSON.stringify(node)))) {
             console.log('Visited')
-            continue
+            continue;
         } 
-        if(JSON.stringify(current) === JSON.stringify(dest)) {
+        if(JSON.stringify(node) === JSON.stringify(dest)) {
             console.log('Path found');
+            console.log("Parent is "+parent)
             return true
         }
         
-        visited.add(JSON.stringify(current));
+        visited.add(JSON.stringify(node));
         console.log("Visited: "+[...visited]);
         
-        const legalMoves = generateLegalMoves(current);
+        const legalMoves = generateLegalMoves(node);
+        
         for (let move of legalMoves) {
             
-            queue.push(move)
+            queue.push({node: move, parent: node})
         } 
         // console.log(queue)  
     }
