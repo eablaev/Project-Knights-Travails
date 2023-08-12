@@ -97,7 +97,13 @@ function findShortestPath(visited,src,dest) {
         } 
         if(JSON.stringify(node) === JSON.stringify(dest)) {
             console.log('Path found');
-            console.log(path)
+            let printPath = '';
+            path.forEach(el => {
+             printPath = printPath +" " + el+" -->"
+            })
+
+             message.innerHTML =" You made it in "+path.length+" moves. Here is your path: "+printPath.slice(0, -3);
+          
             return true
         }
         
