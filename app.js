@@ -33,25 +33,28 @@ function placeKnight() {
     cells.forEach(cell => {
         cell.addEventListener('click',() => {
             if(!knightStart) {
+                resetBoard();
                 cell.classList.add('knightStart');
                 cell.id = 'knightStart';
                 knightStart = true;
                 message.innerHTML = "Now pick the knight's ending position"
                 
+                startingPosition = [];
                 startingPosition.push(Number(cell.dataset.row));
                 startingPosition.push(Number(cell.dataset.col));
             } else {
                 cell.classList.add('knightEnd');
                 cell.id = 'knightEnd';
+
+                targetPosition = [];
                 targetPosition.push(Number(cell.dataset.row));
                 targetPosition.push(Number(cell.dataset.col));
                 findShortestPath(new Set(),startingPosition,targetPosition);
-                knightStart = false
+                knightStart = false;
             }
-            
         });
-    })
-}
+    });
+};
 
 function generateLegalMoves(position){
     const moves = [
@@ -75,7 +78,6 @@ function generateLegalMoves(position){
         if(newRow >= 1 && newRow <= 8 && newCol >= 1 && newCol <= 8) {
             validMoves.push([newRow, newCol]);      
         }
-       
     });
     return validMoves;
 }
@@ -89,7 +91,6 @@ function findShortestPath(visited,src,dest) {
     while (queue.length > 0) {
         const {node, path } = queue.shift();
       
-
         if(visited.has((JSON.stringify(node)))) {
             console.log('Visited')
             continue;
@@ -100,9 +101,7 @@ function findShortestPath(visited,src,dest) {
             path.forEach(el => {
              printPath = printPath +" " + el+" -->"
             })
-
              message.innerHTML =" You made it in "+path.length+" moves. Here is your path: "+printPath.slice(0, -3);
-          
             return true
         }
         
@@ -111,20 +110,15 @@ function findShortestPath(visited,src,dest) {
         
         const legalMoves = generateLegalMoves(node);
         
-        for (let move of legalMoves) {
-            
-            queue.push({ node: move, path: [...path, move] });
-           
+        for (let move of legalMoves) {      
+            queue.push({ node: move, path: [...path, move] });      
         } 
-        // console.log(queue)  
     }
-
-    return false   
-    
-    // message.innerHTML =" Here is the fastest way, from (R,C)"+startingPosition+" to "+targetPosition
+    return false    
 }
 
 function resetBoard() {
+  
     
     const cells = document.querySelectorAll('[data-cell]');
     cells.forEach(cell => {
@@ -132,8 +126,7 @@ function resetBoard() {
         cell.id = '';
     });
     
-    startingPosition = [];
-    targetPosition = [];
+    
     
     const message = document.getElementById('message');
     message.innerHTML = "Pick the knight's starting position";
