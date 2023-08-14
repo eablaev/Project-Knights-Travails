@@ -26,10 +26,9 @@ function createBoard() {
 }
 
 function placeKnight() {
+    resetBoard();
     let knightStart = false;
-    let endKnight = false;
-    const message = document.getElementById('message');
-    message.innerHTML = "Pick the knight's stating position"
+    
     const cells = document.querySelectorAll('[data-cell]');
     cells.forEach(cell => {
         cell.addEventListener('click',() => {
@@ -44,10 +43,10 @@ function placeKnight() {
             } else {
                 cell.classList.add('knightEnd');
                 cell.id = 'knightEnd';
-                endKnight = true;
                 targetPosition.push(Number(cell.dataset.row));
                 targetPosition.push(Number(cell.dataset.col));
                 findShortestPath(new Set(),startingPosition,targetPosition);
+                knightStart = false
             }
             
         });
@@ -124,6 +123,22 @@ function findShortestPath(visited,src,dest) {
     
     // message.innerHTML =" Here is the fastest way, from (R,C)"+startingPosition+" to "+targetPosition
 }
+
+function resetBoard() {
+    
+    const cells = document.querySelectorAll('[data-cell]');
+    cells.forEach(cell => {
+        cell.classList.remove('knightStart', 'knightEnd');
+        cell.id = '';
+    });
+    
+    startingPosition = [];
+    targetPosition = [];
+    
+    const message = document.getElementById('message');
+    message.innerHTML = "Pick the knight's starting position";
+}
+
 
 createBoard();
 
