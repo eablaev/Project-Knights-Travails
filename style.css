@@ -10,8 +10,11 @@ body {
 
 :root {
     --cellSize: 2rem;
-    --background:rgb(173, 170, 170);
+    --background:rgb(170, 173, 171);
     --margin: 0.5rem;
+    --padding: .5rem;
+    --color1: rgb(18, 123, 214);
+    --color2:rgb(238, 69, 69);
 }
 
 
@@ -32,7 +35,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1rem;
+    font-size: .5rem;
 }
 
 .cell.black {
@@ -50,29 +53,39 @@ body {
     align-items: center;
 }
 .startButton {
-    width: 7vw;
+    width: 10vw;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
-    border-radius: 20px;
+    background: rgb(166, 253, 35);
+    border-radius: 10%;
+    font-size: 1rem;
+    font-weight: 100;
+    padding: .3rem 2.3rem;
+    color:var(--color1)
 }
 .startButton:hover {
     cursor: pointer;
-    background-color:var(--background);
+    background-color:rgb(72, 226, 108);
+    color:antiquewhite
 }
 .message {
    font-size: .9rem;
    margin: var(--margin)
 }
 .cell.knightStart {
-    background-color: blue;
+    background-color:var(--color1)
 }
 .cell.knightEnd {
-    background-color: red;
+    background-color: var(--color2)
 }
 
 .cell.legalMove{
     background-color: green;
+}
+
+
+.message{
+    color:var(--color1)
 }
