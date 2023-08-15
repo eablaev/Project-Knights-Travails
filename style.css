@@ -35,7 +35,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: .5rem;
+    /* font-size: 1rem; */
 }
 
 .cell.black {
@@ -65,6 +65,17 @@ body {
     padding: .3rem 2.3rem;
     color:var(--color1)
 }
+.knightCurrent::before {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f441";
+
+}
 .startButton:hover {
     cursor: pointer;
     background-color:rgb(72, 226, 108);
@@ -74,6 +85,33 @@ body {
    font-size: .9rem;
    margin: var(--margin)
 }
+.cell {
+    /* ... (your existing cell styles) */
+    position: relative;
+    font-size: .6rem;
+    color:rgb(58, 50, 50, 30%);
+    transition: background-color 0.3s ease; /* Adding a transition effect for background color */
+}
+
+.knightCurrent.cell.black,
+.knightCurrent.cell.white {
+    background-color: #ffcc00; /* Highlighted color for the current knight position */
+    transition: background-color 0.3s ease; /* Adding a transition effect for background color */
+}
+.knightCurrent::before {
+    display: inline-block;
+    position: absolute;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f441";
+    font-size: 2rem;
+    color:rgb(58, 50, 50, 100%);
+
+}
 .cell.knightStart {
     background-color:var(--color1)
 }
@@ -81,11 +119,12 @@ body {
     background-color: var(--color2)
 }
 
-.cell.legalMove{
-    background-color: green;
-}
+
 
 
 .message{
     color:var(--color1)
 }
+
+
+

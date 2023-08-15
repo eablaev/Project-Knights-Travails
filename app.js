@@ -3,6 +3,7 @@ const placeKnightButton = document.getElementById('placeKnightButton');
 let startingPosition = [];
 let targetPosition = [];
 
+
 function createBoard() {
     const gameBoard = document.getElementById('gameBoard');
     startButton.addEventListener('click', placeKnight);
@@ -36,6 +37,8 @@ function placeKnight() {
                 resetBoard();
                 cell.classList.add('knightStart');
                 cell.id = 'knightStart';
+                cell.id = 'knightCurrent'
+                cell.classList.add('knightCurrent')
                 knightStart = true;
                 message.innerHTML = "Now pick the knight's ending position"
                 
@@ -97,6 +100,8 @@ function findShortestPath(visited,src,dest) {
         } 
         if(JSON.stringify(node) === JSON.stringify(dest)) {
             console.log('Path found');
+            
+            showThePath(path)
             let printPath = '';
             path.forEach(el => {
              printPath = printPath +" " + el+" -->"
@@ -118,8 +123,7 @@ function findShortestPath(visited,src,dest) {
 }
 
 function resetBoard() {
-  
-    
+
     const cells = document.querySelectorAll('[data-cell]');
     cells.forEach(cell => {
         cell.classList.remove('knightStart', 'knightEnd');
@@ -130,6 +134,31 @@ function resetBoard() {
     
     const message = document.getElementById('message');
     message.innerHTML = "Pick the knight's starting position";
+}
+
+function showThePath(path) {
+    
+    let currentIndex = 0;
+
+    function animateNextMove() {
+        if(currentIndex >= path.length) return;
+
+        if(currentIndex > 0) {
+            const [ prevRow, prevCol] = path[currentIndex-1];
+            let prevCell = document.querySelector(`[data-row="${prevRow}"][data-col="${prevCol}"]`)
+            prevCell.classList.remove('knightCurrent');
+
+        }
+        const [row, col] = path[currentIndex];
+        knightCurrent = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+        knightCurrent.classList.add('knightCurrent');
+        currentIndex++;
+
+        setTimeout(animateNextMove,1000);
+
+
+    }
+    animateNextMove();
 }
 
 
