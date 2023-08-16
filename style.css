@@ -65,17 +65,7 @@ body {
     padding: .3rem 2.3rem;
     color:var(--color1)
 }
-.knightCurrent::before {
-    display: inline-block;
-    font-style: normal;
-    font-variant: normal;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    content: "\f441";
 
-}
 .startButton:hover {
     cursor: pointer;
     background-color:rgb(72, 226, 108);
@@ -112,8 +102,9 @@ body {
     color:rgb(58, 50, 50, 100%);
 
 }
+
 .cell.knightStart {
-    background-color:var(--color1)
+    background-color:#ffcc00;
 }
 .cell.knightEnd {
     background-color: var(--color2)

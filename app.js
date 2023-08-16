@@ -123,6 +123,12 @@ function findShortestPath(visited,src,dest) {
 }
 
 function resetBoard() {
+    const knightCurrent = document.querySelector('.knightCurrent');
+    console.log(knightCurrent);
+    if(knightCurrent) {
+        knightCurrent.classList.remove('knightCurrent')
+    }
+    
 
     const cells = document.querySelectorAll('[data-cell]');
     cells.forEach(cell => {
